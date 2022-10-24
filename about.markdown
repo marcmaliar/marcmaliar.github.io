@@ -4,15 +4,8 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+I am a recent graduate of the University of Chicago in Computer Science and Mathematics. I like coding in a variety of languages, but my most proficient is Python, which I used for solving heterogeneous economic models using deep learning.
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
+Recently, my passion has been learning Golang for web development. In the past, I have loved studying Vulkan, Wayland, and Arch Linux.
 
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
-
-
-[jekyll-organization]: https://github.com/jekyll
+In my free time, I transcribe songs on my [YouTube channel](https://www.youtube.com/channel/UCAYXFz70djU2wxrSE7zSOqg/featured).
