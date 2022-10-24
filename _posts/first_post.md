@@ -24,4 +24,4 @@ return -1
 
 {% endhighlight %}
 
-I ... did it? Hooray? +1 for me ... do I get a prize?
+It just works. Ok good.
