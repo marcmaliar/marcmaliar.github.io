@@ -9,9 +9,11 @@ Here are my solutions to the aforementioned book and chapter.
 
 {% highlight python %}
 # 5.1
-# 5.1
 def test_1():
     assert (dutch([0, 1, 2, 0, 2, 1, 1], 1) == [0, 0, 1, 1, 1, 2, 2])
+    assert (dutch([2, 1, 2, 2, 2, 2, 2], 1) == [1, 2, 2, 2, 2, 2, 2])
+    assert (dutch([0, 1, 0, 0, 0, 0, 0], 1) == [0, 0, 0, 0, 0, 0, 1])
+    assert (dutch([2, 2, 1, 0, 0, 0, 0], 2) == [0, 0, 0, 0, 1, 2, 2])
 
 
 def dutch(arr, i):
@@ -20,23 +22,111 @@ def dutch(arr, i):
     b = len(arr) - 1
     current = 0
     while current <= b:
-        print(arr)
         if arr[current] < pivot:
-            if current == a:
-                a += 1
-                current += 1
-            else:
-                arr[a], arr[current] = arr[current], arr[a]
-                a += 1
+            # if current == a:
+            #    a += 1
+            #    current += 1 # we don't need this we can always swap without a problem
+            # else: swap with itself is okay and we can move current ahead as well
+            # because the element we just swapped into current is equal to the pivot
+            arr[a], arr[current] = arr[current], arr[a]
+            a += 1
+            current += 1
         elif arr[current] > pivot:
-            if current == b:
-                b -= 1
-                current += 1
+            # if current == b:
+            #    b -= 1
+            #    current += 1
+            # else:
             arr[b], arr[current] = arr[current], arr[b]
             b -= 1
         else:
             current += 1
     return arr
+
+
+# 5.1 Variant 1
+def test_group_keys():
+    assert (group_keys([0, 1, 2, 0, 2, 1, 1]) == [0, 0, 1, 1, 1, 2, 2])
+    assert (group_keys([3, 4, 2, 2, 3, 2, 4]) == [3, 3, 4, 4, 2, 2, 2])
+
+
+def group_keys(array):
+    keys = [None, None, None]
+    next_open_key = 0
+    a = 0
+    b = len(array) - 1
+    i = 0
+    while i <= b:
+        if array[i] not in keys:
+            keys[next_open_key] = array[i]
+            next_open_key += 1
+        if array[i] == keys[0]:
+            array[a], array[i] = array[i], array[a]
+            # if i == a: i += 1 So the trick is that we don't need this if here
+            # An element that is at position a that we skipped earlier has to be
+            # equal to the pivot or the middle key in this case.
+            i += 1
+            a += 1
+        elif array[i] == keys[1]:
+            i += 1
+        else:
+            array[b], array[i] = array[i], array[b]
+            b -= 1
+    return array
+
+
+# 5.1 Variant 2
+def test_group_four_keys():
+    assert (group_four_keys([0, 2, 1, 1, 3, 2, 3, 0]) == [0, 0, 1, 1, 3, 3, 2, 2])
+
+
+def group_four_keys(array):
+    a = 1
+    i = 1
+    elem = array[0]
+    while i < len(array):
+        if array[i] == elem:
+            array[i], array[a] = array[a], array[i]
+            a += 1
+        i += 1
+    array[a:] = group_keys(array[a:])  # this is not O(1) space anymore since slicing
+    # creates a new list, but it's close enough, if you copy and paste the group_key
+    # code it is O(1)
+    return array
+
+
+# 5.1 Variant 3 (DOES NOT WORK FOR VARIANT 4)
+def test_group_boolean():
+    assert (group_boolean([(False, 1), (False, 2), (True, 3),
+                           (False, 4), (True, 5), (True, 6)]) ==
+            [(False, 1), (False, 2), (False, 4), (True, 3), (True, 5), (True, 6)])
+
+
+def group_boolean(array):
+    a = 0
+    for i in range(len(array)):
+        if not array[i][0]:
+            array[i], array[a] = array[a], array[i]
+            a += 1
+    return array
+
+
+# 5.1 Variant 4
+def test_group_boolean_ordered():
+    assert (group_boolean_ordered([(False, 1), (True, 2), (False, 3),
+                                   (True, 4), (False, 5), (True, 6)]) ==
+            [(False, 1), (False, 5), (False, 3), (True, 2), (True, 4), (True, 6)])
+
+
+def group_boolean_ordered(array):
+    b = len(array) - 1
+    i = len(array) - 1
+    while i >= 0:
+        if array[i][0]:
+            print(i, b)
+            array[i], array[b] = array[b], array[i]
+            b -= 1
+        i -= 1
+    return array
 
 
 # 5.2
@@ -63,7 +153,7 @@ def increment_integer(lst):
     return lst
 
 
-#  5.2 Variant
+# 5.2 Variant
 
 def test_g():
     assert (add_binary('11', '10') == '101')
@@ -94,10 +184,12 @@ def add_binary(s, t):
 # 5.3
 def test_h():
     assert (multiply_better([1, 2], [1, 2]) == [1, 4, 4])
-    assert (multiply_better([1, 9, 3, 7, 0, 7, 7, 2, 1], [-7, 6, 1, 8, 3, 8, 2, 5, 7, 2, 8, 7]) == [-1, 4, 7, 5, 7, 3,
-                                                                                                    9, 5, 2, 5, 8, 9, 6,
-                                                                                                    7, 6, 4, 1, 2, 9, 2,
-                                                                                                    7])
+    assert (multiply_better([1, 9, 3, 7, 0, 7, 7, 2, 1],
+                            [-7, 6, 1, 8, 3, 8, 2, 5, 7, 2, 8, 7]) ==
+            [-1, 4, 7, 5, 7, 3,
+             9, 5, 2, 5, 8, 9, 6,
+             7, 6, 4, 1, 2, 9, 2,
+             7])
 
 
 def multiply(x, y):
@@ -115,7 +207,6 @@ def multiply(x, y):
     r = []
 
     def add_to_ret(ret, z):
-        print(ret, z)
         i = len(z) - 1
         j = len(ret) - 1
         carry = 0
@@ -209,7 +300,7 @@ def test_j():
 
 
 def min_steps_to_advance(array):
-    min_steps = [999999 for _ in array]
+    min_steps = [float('inf') for _ in array]
     min_steps[0] = 0
     for i, a in enumerate(array[:-1]):
         for j in range(i + 1, i + a + 1):
@@ -228,7 +319,7 @@ def test_k():
 def delete_duplicates(array):
     next_open = 1
     last = array[0]
-    for i, a in enumerate(array[1:]):
+    for i, a in list(enumerate(array))[1:]:
         if a != last:
             array[next_open] = a
             last = a
@@ -273,7 +364,6 @@ def remove_key(array, key):
 
 def remove_key_better(array, key):  # Actually correct implementation that shifts
     open_index = 0
-    i = 0
     for i in range(len(array)):
         if array[i] != key:
             array[open_index] = array[i]
@@ -287,6 +377,7 @@ def remove_key_better(array, key):  # Actually correct implementation that shift
 def test_weird():
     assert (weird([1, 2, 3, 3, 3, 4, 4, 5, 5, 5, 5, 6], 3) == [1, 2, 3, 3, 4, 4, 5, 5, 5, 5, 6, 6])
     assert (weird([1, 1, 1, 1, 2, 2, 2, 3, 3], 4) == [1, 1, 2, 2, 2, 3, 3, 3, 3])
+    assert (weird([3, 3, 3], 3) == [3, 3, None])  # my guess is None should be added here
 
 
 def weird(array, m):
@@ -295,10 +386,9 @@ def weird(array, m):
     last = array[0]
     occ = 1
     last_open = 1
-    print(list(enumerate(array[1:])))
     for i, a in enumerate(array):
-        if i == 0: continue
-        print(array, a, last, i, last_open, len(array))
+        if i == 0:
+            continue
         if a == last:
             occ += 1
         else:
@@ -308,7 +398,10 @@ def weird(array, m):
             last = a
         array[last_open] = a
         last_open += 1
-    print(array)
+    if occ == m:
+        last_open -= (m - 2)
+        for i in range(last_open, len(array)):
+            array[i] = None
     return array
 
 
@@ -412,6 +505,194 @@ def alternating(array):
                 array[i - 1], array[i] = array[i], array[i - 1]
         mod = 1 - mod
     return array
+
+
+# 5.9
+def test_primes():
+    assert (primes(15) == [2, 3, 5, 7, 11, 13])
+    assert (primes(9) == [2, 3, 5, 7])
+    assert (primes(23) == [2, 3, 5, 7, 11, 13, 17, 19, 23])
+
+
+import math
+
+
+def primes(n):
+    ret = list()
+    is_prime = [1 for i in range(0, n + 1)]
+    for i in range(2, math.floor(math.sqrt(n) + 1)):
+        if is_prime[i]:
+            ret.append(i)
+        j = 2
+        while i * j < n + 1:
+            is_prime[i * j] = 0
+            j += 1
+    for i in range(math.floor(math.sqrt(n) + 1), n + 1):
+        if is_prime[i]:
+            ret.append(i)
+    return ret
+
+
+# 5.10
+def test_apply_permutation():
+    assert (apply_permutation([1, 2, 3, 4], [2, 0, 1, 3]) == [2, 3, 1, 4])
+    assert (apply_permutation([1, 2, 3, 4], [1, 0, 3, 2]) == [2, 1, 4, 3])
+
+
+def apply_permutation(A, P):
+    visited = [False for _ in A]
+    for A_index in range(len(A)):
+        if visited[A_index]:
+            continue
+        to_be_swapped = A_index
+        visited[A_index] = True
+        while P[to_be_swapped] != A_index:
+            visited[P[to_be_swapped]] = True
+            A[A_index], A[P[to_be_swapped]] = A[P[to_be_swapped]], A[A_index]
+            to_be_swapped = P[to_be_swapped]
+    return A
+
+
+# 5.10 Variation
+
+def test_inverse_permutation():
+    assert (inverse_permutation([1, 2, 3, 4], [2, 0, 1, 3]) == [3, 1, 2, 4])
+    assert (inverse_permutation([1, 2, 3, 4], [1, 0, 3, 2]) == [2, 1, 4, 3])
+    assert (inverse_permutation([1, 2, 3, 4], [1, 2, 3, 0]) == [2, 3, 4, 1])
+
+
+def inverse_permutation(A, P):
+    visited = [False for _ in A]
+    for A_index in range(len(A)):
+        if visited[A_index]:
+            continue
+        visited[A_index] = True
+        current = P[A_index]
+        prev = A_index
+        while current != A_index:
+            visited[current] = True
+            A[prev], A[current] = A[current], A[prev]
+            prev = current
+            current = P[current]
+    return A
+
+
+# 5.11
+def test_next_permutation():
+    assert (next_permutation([0, 1, 2]) == [0, 2, 1])
+    assert (next_permutation([1, 0, 2]) == [1, 2, 0])
+    assert (next_permutation([2, 0, 1]) == [2, 1, 0])
+    assert (next_permutation([2, 1, 0]) == [])
+    assert (next_permutation([1, 5, 4, 3, 2]) == [2, 1, 3, 4, 5])
+    assert (next_permutation([2, 5, 4, 3, 1]) == [3, 1, 2, 4, 5])
+
+
+def next_permutation(array):
+    i = len(array) - 2
+    while i >= 0:
+        if array[i] < array[i + 1]:
+            j = len(array) - 1
+            for j in reversed(range(len(array))):
+                if array[j] > array[i]:
+                    array[i], array[j] = array[j], array[i]
+                    # array[i + 1:] = sorted(array[i + 1:])
+                    array[i + 1:] = reversed(array[i + 1:])  # just reversing is enough
+                    return array
+        i -= 1
+    return []
+
+
+# 5.11 Variant 1
+def test_kth_permutation():
+    assert (kth_permutation(5, 4) == [0, 1, 4, 2, 3])
+    assert (kth_permutation(3, 4) == [2, 0, 1])
+    # 0, 1, 2, 3 ,4
+    # 0, 1, 2, 4, 3
+    # 0, 1, 2, 3 ,4 PREV (2) * 2
+    # 0, 1, 2, 4, 3
+    # 3 * PREV
+    # 4 * PREV
+    # 2, 2*(2), 3*(2*2), 4*3*(2*2)
+
+
+def kth_permutation(n, k):
+    ret = []
+    elements = list(range(0, n))
+    remaining = k
+    for i in range(n - 1, -1, -1):
+        elem = elements[remaining // math.factorial(i)]
+        remaining = remaining % math.factorial(i)
+        ret.append(elem)
+        elements.remove(elem)
+    return ret
+
+
+# 5.11 Variant 2
+def test_previous_permutation():
+    assert (previous_permutation([0, 1, 2]) == [])
+    assert (previous_permutation([2, 0, 1]) == [1, 2, 0])
+    assert (previous_permutation([2, 1, 0]) == [2, 0, 1])
+    assert (previous_permutation([1, 2, 0]) == [1, 0, 2])
+
+
+def previous_permutation(perm):
+    for i in range(len(perm) - 2, -1, -1):
+        if perm[i] > perm[i + 1]:
+            # Found the right place to swap
+            for j in range(len(perm) - 1, 0, -1):
+                if perm[j] < perm[i]:
+                    perm[i], perm[j] = perm[j], perm[i]
+                    perm[i + 1:] = reversed(perm[i + 1:])
+                    return perm
+
+    return []
+
+
+# 5.12
+def test_random_subset():
+    for _ in range(5):
+        print(random_subset(list(range(10)), 3))
+    assert True
+
+
+import random
+
+
+def random_subset(array, size):
+    last = len(array) - 1
+    subset = []
+    for _ in range(size):
+        i = random.randint(0, last)
+        subset.append(array[i])
+        array[i], array[last] = array[last], array[i]
+        last -= 1
+    return subset
+
+
+# 5.12 Variant 1
+# No it does not, unless n-1 is a multiple of RAND_MAX-1.
+
+# 5.13
+import itertools
+
+
+# the chance of a packet being in a random subset is k/n
+# through the formula (n-1 C k-1) / (n C k)
+# so take a random subset of size k-1 and conditionally
+# adding in the new packet should produce the same
+# probability space
+def uniform_packets_subset(it, k):
+    random_subset2 = list(itertools.islice(it, k))
+
+    packets_seen = k
+    for x in it:
+        packets_seen += 1
+        r = random.randrange(0, packets_seen)
+        if r < k:
+            random_subset2[r] = x
+    return random_subset2
+
+# 5.14
 
 
 {% endhighlight %}
