@@ -21,7 +21,7 @@
 title: Marc Maliar
 email: mmaliar00_at_gmail
 description: >- # this means to ignore newlines until "baseurl:"
-  My personal blog of CS thoughts and more
+  Tracking my Computer Science progress
 baseurl: '' # the subpath of your site, e.g. /blog
 url: '' # the base hostname & protocol for your site, e.g. http://example.com
 github_username: marcmaliar

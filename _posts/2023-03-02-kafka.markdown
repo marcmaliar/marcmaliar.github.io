@@ -1,0 +1,59 @@
+---
+layout: post
+title: 'Apache Kafka Series - Learn Apache Kafka for Beginners v3 (NOTES)'
+date: 2023-03-02 13:35:34 -0400
+categories: jekyll update
+---
+
+I started learning today about Apache Kafka from this course: [Link to Udemy course](https://www.udemy.com/course/apache-kafka/). The idea is for me to write these notes from memory so the information stays in my head better. In red are the extra notes I wrote after the first draft.
+
+<h1>Basics</h1>
+<p>
+Kafka is a message-passing framework that provides a common interface between streams of data
+and applications that use that data.
+<br><br>
+The idea is that data comes from multiple source systems and must be stored and later processed in multiple target systems or applications. For example, GPS data may come from several trucks. Each truck is a stream of data. The GPS data must be stored coherently and then several applications need to read that data, for example a mobile app that tracks where
+the trucks are and in addition a report that compiles truck routes.
+<br><br>
+The issue if you don't use a middle layer like Kafka is that you have to integrate every additional source system into every application, so the work becomes multiplicatively more challenging. Each source system has different data format, the protocol (UCP, IP, etc) is different, and the applications have to read data a certain way so we really need to standardize the data in the middle so this multiplicative complexity doesn't occur.
+<br><br>
+<span style="color:red">Also</span>
+</p>	
+
+<h1>Topics and Producers</h1>
+<p>
+For every kind of stream of data, we create a topic for it in Kafka. A topic just holds data that is supposed to be the same type but there really aren't many checks for that.
+<br><br>
+Every topic is subdivided into partitions. Each partition will hold some of the data, and the partitions will be distributed on separate servers. This makes Kafka horizontally scalable. Just add more servers and more partitions if you have that much data per topic.
+<br><br>
+The way a stream of data interfaces with a Kafka topic is through this thing called a Producer. The Producer takes in the data, called a value and wraps it in a message. The Producer decides which partition to send the data into, and so adds the topic and partition number to the message. 
+<br><br>
+By default, the Producer decides which partition to send the data into using a round robin approach (first partition 0, then partition 1, etc). If you would like to affect this, you can optionally pass a key with the value. The hash of that key will determine which partition to send it to. This is really important if you want to manually determine which partition to send it into.
+<br><br>
+Why would you want to manually determine this? Well, when data enters a partition, the order is conserved within that partition. The idea is that later Consumers are going to read these stored messages one-by-one within each partition and data that you organized by hash value into these partitions will conserve insertion order which is great.
+<br><br>
+The message also gets a timestamp, headers, and the format of the data.
+<br><br>
+Obviously, the message isn't stored like that in Kafka. It is converted into bytes with a Serializer. Depending on the type of the key and value, a different Serializer is used. This makes the data in a topic of uniform format, probably. ???
+<br><br>
+Messages in a topic are erased after one week by default. Messages are also stored one after another in a partition, with a certain offset (like an array). This offset will be important in the next section.
+</p>
+
+<h1>The Consumer and Consumer Groups</h1>
+<p>
+An application creates a Consumer that reads messages stored in Kafka. The Consumer requests messages left to right and deserializes them.
+<br><br>
+Consumers are combined into Consumer groups. Each application has a multiple Consumers, bundled up into a Consumer group. In a group, each Consumer is assigned to some partitions of a chosen topic. A Consumer may have multiple partitions, only one, or none at all if there are more partitions than Consumers. In the last case, the Consumers without a group just sit idle. 
+<br><br>
+If a Consumer shuts down while reading, this is kind of a problem for us, since we want to make sure it starts reading where it stopped. Thus, each Consumer commits its reading progress to a special internal Kafka topic called __consumer_offset. This topic stores each Consumer's offset into the partition it's reading. What if it's reading multiple partitions? Not sure. How does a Consumer find its offset? Probably by going through the entire topic and finding its latest stored offset. 
+<br><br>
+How often/when do Consumers commit these offsets? Well, there are three strategies. The first, the default one, is called "at least once", which means the Consumer commits after receving every single message. If the Consumer shuts down while processing this message and restarts, it will probably end up processing the message again. So you want to make sure that if you choose this option, your Consumer logic does not mind the scenario where it will accidentally process the same message twice (this means your Consumer logic is idempotent). The second is called "at most once", which means the Consumer commits after receiving a single message. If the Consumer shuts down before finishing processing a message and restarts, this message will be lost. The third is "exactly once" and means that either your Consumer is going to write its result back to Kafka (Kafka to Kafka) or it is idempotent. 
+</p>
+
+<!---
+<h1></h1>
+<p>
+<br><br>
+<br><br>
+</p>
+-->
