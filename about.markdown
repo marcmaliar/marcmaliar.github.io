@@ -8,4 +8,4 @@ I am a recent graduate of the University of Chicago in Computer Science and Math
 
 Recently, my passion has been learning Golang for web development. In the past, I have loved studying Vulkan, Wayland, and Arch Linux.
 
-In my free time, I transcribe songs on my [YouTube channel](https://www.youtube.com/channel/UCAYXFz70djU2wxrSE7zSOqg/featured).
+In my free time, I transcribe songs on my Youtube channel.

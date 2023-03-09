@@ -1,0 +1,36 @@
+---
+layout: post
+title: 'Docker and Python notes'
+date: 2023-03-02 13:35:34 -0400
+categories: jekyll update
+---
+
+Notes for another course on Python and Docker
+
+<h1>Containers</h1>
+<p>
+A container image is a file that holds all the code and libraries necessary to run some software. A container is a runtime environment that is created from a container image. Container images are not VM's: they don't have a kernel, which gives the a great advantage that they can be created and start really quickly. They have their own IP address and that's how they share information with other containers (two containers do not have access to each other's memory).
+<br><br>
+The catch is that containers must be run on a similar chipset and operating system. While Linux containers can usually run on Linux, Windows, and MacOS, there are some Windows containers that can only run on Windows.
+<br><br>
+When a container reads from one of those OS folders like /bin, it's actually reading it from the host operating system. And when it tries to write to it, the container doesn't actually write those changes to the OS but instead saves it in a thin "write" layer that is discarded when the container is shut down. A container really shouldn't be able to write to an OS folder if I am not mistaken.
+<br><br>
+<span style="color:red">A container cannot see processes in its host system or other containers. A container cannot use software installed on the host file system. Each container has its own file system. How to build a container? Start with a base image, and add parts on top if it (add Python, add Flask, like that). When the kernel hangs in a system with containers, all the containers hang (but in a VM this wouldn't be a problem since each VM has its own kernel). </span>
+</p>	
+
+<h1>Deployment</h1>
+<p>
+Containers can be manually deployed. Create the container, clone the right version of your software, install the libraries, then freeze it. Then wherever it needs to be deployed, download the container image and run it (no need to download software or install libraries as those come packaged in the freezed container image).
+<br><br>
+However, this is too hard. So there's a file called a Dockerfile that you need to write to automate the creation of new container images. The Dockerfile can become a part of your version control. The new container image can also be uploaded online to a cloud provider as a public or private image, depending on your visibility need. 
+<br><br>
+<span style="color:red">Docker build creates an image from a Dockerfile. Images can run on any similar OS. Automatic deployment of images can be controlled using Docker Swarm or a layer on top of that with Jenkins which updates necessary images, runs unit tests, and rolls back versions if unit tests fail.  </span>
+</p>
+
+<!---
+<h1></h1>
+<p>
+<br><br>
+<br><br>
+</p>
+-->
