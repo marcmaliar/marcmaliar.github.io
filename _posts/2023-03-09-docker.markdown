@@ -5,7 +5,7 @@ date: 2023-03-02 13:35:34 -0400
 categories: jekyll update
 ---
 
-Notes for another course on Python and Docker
+Notes for another course on Python and Docker. Notes are from memory until the font turns red, that is when I go back to the material for notes I missed.
 
 <h1>Containers</h1>
 <p>
@@ -24,7 +24,20 @@ Containers can be manually deployed. Create the container, clone the right versi
 <br><br>
 However, this is too hard. So there's a file called a Dockerfile that you need to write to automate the creation of new container images. The Dockerfile can become a part of your version control. The new container image can also be uploaded online to a cloud provider as a public or private image, depending on your visibility need. 
 <br><br>
-<span style="color:red">Docker build creates an image from a Dockerfile. Images can run on any similar OS. Automatic deployment of images can be controlled using Docker Swarm or a layer on top of that with Jenkins which updates necessary images, runs unit tests, and rolls back versions if unit tests fail.  </span>
+<span style="color:red">Docker build creates an image from a Dockerfile. Images can run on any similar OS. Automatic deployment of images can be controlled using Docker Swarm or a layer on top of that with Jenkins which updates necessary images, runs unit tests, and rolls back versions if unit tests fail. Docker Hub is where you upload docker images. Docker Registry is a local environment for storing and organizing docker images. Prometheus and/or Datadog are applications for monitoring software running in containers. Containers now have a open-source standard for how they should look like so that you can run a standardized container on any applicable runtime.</span>
+</p>
+
+<h1>Orchestration Frameworks</h1>
+<p>
+As your application gets more complex, need for horizontal scaling and vertical improvements (load balancer, more servers, in memory database, etc). Need automatic deployment -- for example, add more servers, upgrade version of base images, etc. The hard part is the YAML file, running Kubernetes is easy. Each service provider has their deployment service.  
+<br><br>
+<span style="color:red">Kubectl can be used imperatively. </span>
+</p>
+
+<h1>Python Flask Container example</h1>
+<p>Flask application declares IP 0.0.0.0 which is automatically exposed. And it specifies port 5000 for connection. The Dockerfile has multiple commands. First, it uses image python:3 as base image. If python:3 is updated (for example, for security), just pull the image and restart containers (there is an automated way to do this). Next, set working directory to /usr/src/app. If this directory doesn't exist, Docker will create it. Copy our py file over, run requirements, declare that we will expose port 5000 in our container (only in the runtime), and declare with CMD to run the main.py file (again only in the runtime) not in this image. Docker freezes the image. We run the dockerfile with docker build with image tag. Then run an instance of the container with docker run (?) --rm (to remove the container once it finishes running) -it (uses the terminal and makes it interactive) then the image plus the ports that we are exposing (-p 0.0.0.0:5001:5000). Then go to localhost:5001 and voila. 
+<br><br>
+<span style="color:red">Have to map network ports in container to host system (through exposing). Defined at runtime when we launch a container. Flask will only accept connections to correct IP address unless you use 0.0.0.0 </span>
 </p>
 
 <!---
