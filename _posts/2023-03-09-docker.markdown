@@ -40,6 +40,23 @@ As your application gets more complex, need for horizontal scaling and vertical 
 <span style="color:red">Have to map network ports in container to host system (through exposing). Defined at runtime when we launch a container. Flask will only accept connections to correct IP address unless you use 0.0.0.0 </span>
 </p>
 
+<h1>Deploying the Flask Application to different servers</h1>
+<p>
+Use docker-machine to set up a server on AWS or the Google one that is a docker host. Login to the server using bash-env, pull the container from docker hub, and run the image. Find the server with the internal IP address. Shut down the server with docker-machine rm. 
+<br><br>
+Using local kubernetes: kubectl run/get deployment, kubectl service (expose port 5000). 
+</p>
+
+<h1>Installation</h1>
+<p>
+When Docker is installed on MacOS, it actually runs in a tiny VM. But on Linux it runs as a simple service. Install docker, get docker compose, get docker-machine + virtualbox, then kubectl + minikube. Docker machine can create multiple VMs, each with docker, perhaps running several containers at the same time. 
+</p>
+
+<h1>Docker Linux Security Risk</h1>
+<p>
+A user that has unrestricted access to Docker, even if the user has no access to root user, can spin up docker containers that affect root (since containers and host share kernel and containers run in root). This is really bad, so do not run random containers, they may screw up root.
+</p>
+
 <!---
 <h1></h1>
 <p>
