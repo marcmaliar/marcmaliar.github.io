@@ -1,0 +1,31 @@
+---
+layout: post
+title: Terraform
+date: 2023-03-21 13:35:34 -0400
+categories: jekyll update
+---
+
+AWS VPC notes.
+
+<h1>How IP Addresses work</h1>
+<p>
+<br>Your computer sends request to DNS server (Domain Name resolution) to get IP address of website. Then can communicate to website. IP Addresses are four eight-bit numbers (0-255). <br>
+<br><br>
+</p>
+
+<h1>VPC</h1>
+<p>
+<br>VPCs are virtual private networks. They have hosts that are assigned IP addresses 0.0.0.0 to 255.255.255.255. This is a logical network (not in the real internet). Use 10.*.*.* or some other special IP address ranges to make sure the IPs are available for that private network. <br>
+<br>VPCs are divided into non-overlapping subnets. Each host in the VPC has an IP address, and which subnet it belongs to depends on the beginning bits of its IP address and this thing called a subnet mask. If its IP is for example 10.1.0.1/16, this means that it belongs to the VPC of all hosts that start with 10.1 (the first 16 bits of this host's IP address). The subnet mask in this case is implicitly 255.255.0.0 which is applied to the IP address to get the 10.1. The 16 is just shorthand notation for the subnet mask (mask away everything except the first 16 bits). With this configuration, the last two 8-bit numbers are allowed to be anything, so in this case the subnet supports 255*255 hosts.<br>
+<br>Actually, the example was slightly inaccurate. In VPC, we have multiple subnets, so to distinguish subnets we steal some of the bits from the host portion of the IP address. The part before (common to all addresses on the VPC) is called a CIDR block. The CIDR block in the example above is 10, then the subnet mask is 8 (confusingly), possible subnets are 10.0-10.255, and the last two numbers can be anything again. <br>
+<br>Hosts should be able to talk to each other directly inside VPCs. The route table describes how to navigate subnets inside a VPC. An internet gateway is something the route table connects with to route traffic from special public hosts. <br>
+<br>Don't overlap CIDR blocks!<br>
+</p>
+
+<!---
+<h1></h1>
+<p>
+<br><br>
+<br><br>
+</p>
+-->

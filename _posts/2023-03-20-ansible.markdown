@@ -1,0 +1,31 @@
+---
+layout: post
+title: Terraform
+date: 2023-03-20 13:35:34 -0400
+categories: jekyll update
+---
+
+You know the drill. Another course, this time on Terraform for AWS.
+
+<h1>Terraform commands intruduction</h1>
+<p>
+<br>Terraform is configured with a .tf command which defines information about the servers you want to provision. To start Terraform, type the command terraform init which initializes the .terraform directory with some provisioner which you defined in the .tf file. For AWS, this is hashicorp AWS. It also creates a lock file which locks the version of the hashicorp AWS provider that you are using so future terraform inits use the same version (keep this file in source control). <br>
+<br>Next, you run terraform validate which checks to see if your .tf file is valid. Pretty straightforward. In the example given, the .tf file contains an AMI of the AWS EC2 instance you hope to provision and its type (t2.micro).<br>
+<br>The next step is terraform plan which shows what Terraform plans to run to provision the instance you requested. A lot of the instance information si not known now (such as IP address and whatever else). You only know the things you specified, which is the AMI and the EC2 type. At least in this example.<br>
+<br>Terraform apply uses the provisioner you downloaded to apply the plan. You should see the EC2 instance created. <br>
+<br>Terraform destroy destroys the EC2 instance. <br>
+</p>
+
+<h1>Terraform Config file basics</h1>
+<p>
+<br>Resource block type is a server you are going to provision. Multiple block labels potentially for each block. Then arguments. <br>
+<br><br>
+</p>
+
+<!---
+<h1></h1>
+<p>
+<br><br>
+<br><br>
+</p>
+-->

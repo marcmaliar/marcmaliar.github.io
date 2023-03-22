@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Noteflight API can't use"
+title: "Could not use Noteflight API to download all my past scores"
 date: 2023-03-10 13:35:34 -0400
 categories: jekyll update
 ---
