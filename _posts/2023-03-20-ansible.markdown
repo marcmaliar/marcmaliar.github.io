@@ -1,11 +1,11 @@
 ---
 layout: post
-title: Terraform
+title: Other courses (NOTES)
 date: 2023-03-20 13:35:34 -0400
 categories: jekyll update
 ---
 
-You know the drill. Another course, this time on Terraform for AWS.
+I also tried to learn Terraform for AWS, because DevOps interests me.
 
 <h1>Terraform commands intruduction</h1>
 <p>
@@ -20,6 +20,23 @@ You know the drill. Another course, this time on Terraform for AWS.
 <p>
 <br>Resource block type is a server you are going to provision. Multiple block labels potentially for each block. Then arguments. <br>
 <br><br>
+</p>
+
+I also spent a little time learning about Protobuf:
+
+<h1>Making an Http JSON API for a Log Record Application</h1>
+<p>
+<br>Use a mutex to lock the log. Encode/decode the JSON from the request body and into the response. Put it inside internal folder. JSON is human readable and great which makes it a great choice for public-facing APIs. But internally (like between microservices) you kinda want something faster, more space efficient, checks semantics, cross-platform, versioned, types safety, backwards compatible, and more. <br>
+<br><br>
+</p>
+
+Lastly, I studied Rust:
+
+<h1>Some summary</h1>
+<p>
+<br> Strings and vecs are for dynamically sized strings/arrays, &str and &[T] are references to dynamic OR fixed size strings/arrays. These references have a size which is why they're called fat pointers. Methods are defined on these slices (mostly). vec! creates a new vector and adds all the elements one by one. It's a little faster than doing it yourself though because it pre-allocates the right number of spaces for the elements.<br>
+<br>Rust single ownership forms a tree so there's no way to loop back around. <br>
+<br>Python counts the number of references to objects. Assignments increase the reference counter. C++ performs deep copy. Rust moves ownership. <br>
 </p>
 
 <!---

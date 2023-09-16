@@ -1,11 +1,11 @@
 ---
 layout: post
-title: 'Docker and Python notes'
+title: 'Docker and Python UDEMY Course (NOTES)'
 date: 2023-03-02 13:35:34 -0400
 categories: jekyll update
 ---
 
-Notes for another course on Python and Docker. Notes are from memory until the font turns red, that is when I go back to the material for notes I missed.
+Docker is one of my favorite tools, so I enjoyed learning a lof about it. Here are my notes on some of my favorite topics.
 
 <h1>Containers</h1>
 <p>
@@ -16,7 +16,7 @@ The catch is that containers must be run on a similar chipset and operating syst
 When a container reads from one of those OS folders like /bin, it's actually reading it from the host operating system. And when it tries to write to it, the container doesn't actually write those changes to the OS but instead saves it in a thin "write" layer that is discarded when the container is shut down. A container really shouldn't be able to write to an OS folder if I am not mistaken.
 <br><br>
 <span style="color:red">A container cannot see processes in its host system or other containers. A container cannot use software installed on the host file system. Each container has its own file system. How to build a container? Start with a base image, and add parts on top if it (add Python, add Flask, like that). When the kernel hangs in a system with containers, all the containers hang (but in a VM this wouldn't be a problem since each VM has its own kernel). </span>
-</p>	
+</p>
 
 <h1>Deployment</h1>
 <p>

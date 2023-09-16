@@ -1,11 +1,11 @@
 ---
 layout: post
-title: AWS VPC
+title: Virtual Private Cloud (NOTES)
 date: 2023-03-21 13:35:34 -0400
 categories: jekyll update
 ---
 
-AWS VPC notes.
+As I was studying for my AWS certification (which I didn't end up getting, only the Azure certification), I decided to learn about networking. I didn't get the chance to take networking in university, so this was a good opportunity to learn. I found that it was challenging and interesting.
 
 <h1>How IP Addresses work</h1>
 <p>

@@ -1,11 +1,11 @@
 ---
 layout: post
-title: 'Apache Kafka Series - Learn Apache Kafka for Beginners v3 (NOTES)'
+title: 'Apache Kafka Series UDEMY Course (NOTES)'
 date: 2023-03-02 13:35:34 -0400
 categories: jekyll update
 ---
 
-I started learning today about Apache Kafka from this course: [Link to Udemy course](https://www.udemy.com/course/apache-kafka/). The idea is for me to write these notes from memory so the information stays in my head better. In red are the extra notes I wrote after the first draft.
+I started learning today about Apache Kafka from this course: [Link to Udemy course](https://www.udemy.com/course/apache-kafka/). I write these these notes from memory so the information stays in my head better. After I first pass, I rewatched the videos and added the information I missed in red.
 
 <h1>Basics</h1>
 <p>
@@ -18,7 +18,7 @@ the trucks are and in addition a report that compiles truck routes.
 The issue if you don't use a middle layer like Kafka is that you have to integrate every additional source system into every application, so the work becomes multiplicatively more challenging. Each source system has different data format, the protocol (UCP, IP, etc) is different, and the applications have to read data a certain way so we really need to standardize the data in the middle so this multiplicative complexity doesn't occur.
 <br><br>
 <span style="color:red">Also</span>
-</p>	
+</p>
 
 <h1>Topics and Producers</h1>
 <p>
