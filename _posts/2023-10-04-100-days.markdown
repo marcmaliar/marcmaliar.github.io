@@ -27,6 +27,26 @@ With ChatGPT's help, here are the things I learned so far:
 <br>
 </p>
 
+<h1>Day 2 (Oct 5)</h1>
+Going to read a little bit of this: [Building a torrent client from scratch](https://blog.jse.li/posts/torrent/)
+<p>
+Here's what I learned (or am learning):
+<ol>
+    <li>Unlike what I assumed, torrent clients need a main central http server to get a list of peers. I thought it was fully decentralized but no. Because of this, if a torrent site goes down, I believe all the peers in those torrents are lost, which sounds like a really big issue. However, the author mentions magnet links and other actually decentralized ways of discovering peers. So they got this problem figured out. </li>
+    <li>Torrent file sizes are really small (256kb-1mb) and are secured with hash, which is a great system, since it makes torrents unhackable, unless the main server which gives you the torrent file is hacked, of course. If the main server gives incorrect hashes AND gives you a list of hacked peers, then it's the end.  But if only of these problems exist, your peer will refuse to torrent.  </li>
+    <li>Torrents are stored in bencode, which is a very opinionated choice because it looks hard to read. </li>
+    <li>User IP addresses AND ports are shown publicly. That seems kinda scary, especially ports. Wonder if malware-ridden torrent clients can be used to hack into computers. </li>
+    <li>Peers don't actually request the pieces mentioned above, they request blocks, which are a range of the bits in a piece. Multiple blocks are requested at once because network round trips are super expensive. If instead you were to ask for the blocks once by one, your client would be more than an order of magnitude slower. </li>
+
+</ol>
+
+<br>
+
+<br>
+
+<br>
+</p>
+
 <!---
 <h1></h1>
 <p>
