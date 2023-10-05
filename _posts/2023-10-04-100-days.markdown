@@ -1,0 +1,36 @@
+---
+layout: post
+title: '100 Days of Coding'
+date: 2023-10-04 10:11:34 -0400
+categories: jekyll update
+---
+
+Starting today, October 4, I will be coding a little bit every day on topics that I enjoy.
+
+<h1>Day 1 (Oct 4)</h1>
+[Tutorial](https://aosabook.org/en/500L/a-3d-modeller.html)
+<p>
+
+Today, I started following this tutorial. I did a bit of graphics programming in university but I still find it fun and thus this was one of the first tutorials I wanted to try.
+<br>
+
+<br>
+With ChatGPT's help, here are the things I learned so far: 
+<ol>
+  <li>Legacy OpenGL and modern OpenGL are different: the legacy one you tell OpenGL specifically the effects you want to put on the objects and in the modern one you apply shaders sequentially yourself. The modern way is harder to understand but more powerful (probably). </li>
+  <li>The objects supplied to the renderer consist of shape vertices and a normal vector for where the plane is facing. </li>
+  <li>Culling refers to not rendering a side of the face, usually the back side. This is for efficiency reasons. There are times you don't want to cull: for example, some effects, like transparency effects, rely on both sides to be rendered. </li>
+  <li>OpenGL calls act on a global OpenGL object, not a buffer like in Vulkan. Buffers again give more power to the programmer at the cost of increased complexity. </li>
+  <li>GL_DEPTH_TEST allows OpenGL to track depth values of objects and display objects in front of others. This is necessary for 3D, except when objects are transaparent. </li>
+
+</ol> 
+<br>
+</p>
+
+<!---
+<h1></h1>
+<p>
+<br><br>
+<br><br>
+</p>
+-->
