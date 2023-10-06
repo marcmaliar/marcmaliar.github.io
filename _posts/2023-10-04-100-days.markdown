@@ -39,12 +39,18 @@ Here's what I learned (or am learning):
     <li>Peers don't actually request the pieces mentioned above, they request blocks, which are a range of the bits in a piece. Multiple blocks are requested at once because network round trips are super expensive. If instead you were to ask for the blocks once by one, your client would be more than an order of magnitude slower. </li>
 
 </ol>
+</p>
 
-<br>
+<h1>Day 3 (Oct 6)</h1>
 
-<br>
+<p>
+Read a little bit of various tutorials.
+<ol>
+    <li>I learned that discord bots must register their slash commands through Rest API.  </li>
+    <li>I found a league client realtime game API, which is quite exciting. Wonder why no one has built an AI bot?</li>
+    <li>Not much else just looked through various tutorials.</li>
 
-<br>
+</ol>
 </p>
 
 <!---
