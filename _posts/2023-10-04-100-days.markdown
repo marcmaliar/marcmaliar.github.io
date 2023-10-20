@@ -1,6 +1,6 @@
 ---
 layout: post
-title: '100 Days of Coding'
+title: '4 Days of Coding'
 date: 2023-10-04 10:11:34 -0400
 categories: jekyll update
 ---
@@ -52,6 +52,15 @@ Read a little bit of various tutorials.
 
 </ol>
 </p>
+
+<h1>Day 4 (Oct 7)</h1>
+Looked at WASP: [WASP](https://github.com/wasp-lang/wasp). 
+<p>
+<br><br>
+<br><br>
+</p>
+
+This was a short-lived experiment. Hopefully, I can find an interesting project to work on in the future.
 
 <!---
 <h1></h1>
