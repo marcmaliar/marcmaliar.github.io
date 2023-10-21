@@ -1,6 +1,6 @@
 ---
 layout: post
-title: '4 Days of Coding'
+title: '5 Days of Coding'
 date: 2023-10-04 10:11:34 -0400
 categories: jekyll update
 ---
@@ -54,13 +54,21 @@ Read a little bit of various tutorials.
 </p>
 
 <h1>Day 4 (Oct 7)</h1>
-Looked at WASP: [WASP](https://github.com/wasp-lang/wasp). 
-<p>
-<br><br>
-<br><br>
-</p>
+Looked at WASP: [WASP](https://github.com/wasp-lang/wasp).
 
-This was a short-lived experiment. Hopefully, I can find an interesting project to work on in the future.
+<h1>Day 5 (Oct 21)</h1>
+I went all over the place.
+<p>
+First, I looked at Voyager, which is an LLM-powered Minecaft AI. It uses ChatGPT's Minecraft internet knowledge to create tasks and assessments for a Minecraft player. 
+<br>Initially, I was disappointed because an AI using internet knowledge will only be as good as the humans that wrote that internet knowledge in the first place. However, upon thinking about it more, I think learning from humans is the only way an AI can learn to solve real-world problems, because real-world problems are inherently human problems that are documented by humans. 
+<br>
+<br>And once ChatGPT image comes out (don't think it's out yet), the minecraft player will be able to see the game and actually assign meaning to the objects, instead of abstractly figuring out the meaning of objects (which was how RL arguments used to work). For example, it will see an axe, a sheep, and a hungar bar. Axes are weapons, sheep are food, and hunger bars are used in video games. It will then figure out from human knowledge that it should use the axe to kill the sheep to get food to fill the hunger bar. That simple!
+<br><br>However, to surpass human performance in a task like a game, traditional RL-learning should probably be used. Nevertheless, pretraining with human data is a great idea. And the critic should maybe still be human. After all, these are human problems we are talking about.
+
+<br>
+<br>What are word embeddings? Basically, take every word in the English language and assign it a multidimensional vector with 100-300 dimensions with two additional purposes: (1) vectors with similar meanings should be close to each other and (2) vector addition/subtraction should work, i.e. king-man+woman=queen. LLMs don't use already existing word embeddings like Word2Vec but generate their own based on context & attention. <br>
+
+</p>
 
 <!---
 <h1></h1>
