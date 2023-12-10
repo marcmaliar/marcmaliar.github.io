@@ -70,6 +70,14 @@ First, I looked at Voyager, which is an LLM-powered Minecaft AI. It uses ChatGPT
 
 </p>
 
+<h1>Day 6 (Oct 22)</h1>
+<p>
+
+<br>Looked at more Rust things, shuttle.rs (which seems really really interesting), some Kafka things, among others. <br>
+<br><br>
+
+</p>
+
 <!---
 <h1></h1>
 <p>

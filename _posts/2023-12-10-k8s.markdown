@@ -1,0 +1,61 @@
+---
+layout: post
+title: 'Kubernetes Learning'
+date: 2023-12-10 10:11:34 -0400
+categories: jekyll update
+---
+
+Kubernetes is super important. I'll try to write down what I learn here about it.
+
+<h1>Service accounts</h1>
+<p>
+Kubernetes pods have KUBERNETES_SERVICE_HOST and KUBERNETES_SERVICE_PORT environment variables set, as well as a token in /var/run/secrets/kubernetes.io/serviceaccount/token. When kubectl is run within a pod, it checks to see if all these three are present. If so, kubectl realizes that it is running within a pod. 
+<br><br>
+A service account token allows a pod to talk with other pods in the cluster through the Kubernetes API. It describes also what work it is allowed to do (I think?) and eventually the pod does expire. Most importantly, it contains the secret that allows it to interact with the other pods. This secret is deposited when the pod is created. 
+<br><br>
+The POD_NAMESPACE variable reflects the namespace of the current pod. If a namespace is not explicitly passed into kubectl and kubectl is run within a pod, kubectl will use the POD_NAMESPACE variable as the implicitly provided namespace. 
+</p>
+
+<h1>Kubernetes Overview</h1>
+[https://kubernetes.io/docs/concepts/overview/](https://kubernetes.io/docs/concepts/overview/)
+
+<p>
+
+I just remembered. One of the big differences between a VM and a container is that a VM has its own operating system, which makes it much heavier than a container. Having your own OS means more background processes running, more disk space. Running different OSes on the same machine is a good thing but container pros are much better, I don't think VM cons are acceptable in this age.
+
+<br><br>
+
+Separation of concerns - Dev guys don't need to worry about where their application is getting deployed, and Ops guys don't need to worry about the application actually building.
+
+<br><br>
+
+Kubernetes is both declarative and can be automated with imperative commands. Other Kubernetes interesting features: automatic rollback, and others (kinda done with this page).
+
+</p>
+
+<h1>Kubernetes Overview Video + some ChatGPT prompting</h1>
+[https://www.youtube.com/watch?v=VnvRFRk_51k](https://www.youtube.com/watch?v=VnvRFRk_51k)
+<p>
+Kubernetes is separated into control plane components, and nodes. Control plane components include the Kubernetes API server, ETCD instance, and other components. These components do not all have to sit on the same node. Indeed, there are often multiple copies of each control plane component to protect against outages, and they maintain synchronicity via a synchronization mechanism called raft. The control plane components store their data exclusively in ETCD key-value stores, pretty much. 
+<br><br>
+A node runs many containers at the same time. 
+<br><br>
+More information: Kubernetes API is accessed both by the user and nodes, the scheduler manages creation of new nodes, and controller manager communicates with nodes to see if they're okay. 
+</p>
+
+<h1>Running minikube locally</h1>
+<p>
+Apparently, when looking at my minikube cluster, I have realized that even pods with the "control-plane" role can also host application pods. I mean, it certainly has to be this way because I don't have any other nodes, but it is interesting to see the role is still "control-plane" and not some hybrid. 
+<br><br>
+A deployment is a deployment of images to nodes, and a service is forwarding ...
+<br><br>
+To be continued
+</p>
+
+<!---
+<h1></h1>
+<p>
+<br><br>
+<br><br>
+</p>
+-->
